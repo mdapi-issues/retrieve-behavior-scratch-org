@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "importHelpers": true,
+    "resolveJsonModule": true
+  },
+  "include": ["./src/**/*"]
+}
