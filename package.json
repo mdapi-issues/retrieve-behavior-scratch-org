@@ -1,0 +1,27 @@
+{
+  "name": "@mdapi-issues/retrieve-behavior-scratch-org",
+  "description": "Minimal working example to demonstrate the Metadata API behaves differently when retrieving Metadata from a Scratch Org vs. other Org",
+  "private": true,
+  "version": "0.0.0-development",
+  "author": "Matthias Rolke @amtrack",
+  "bugs": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org/issues",
+  "dependencies": {},
+  "devDependencies": {
+    "sfdx-cli": "7.127.0"
+  },
+  "homepage": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org",
+  "keywords": [
+    "salesforce",
+    "mdapi-issue",
+    "minimum-working-example",
+    "MWE"
+  ],
+  "license": "MIT",
+  "repository": "mdapi-issues/retrieve-behavior-scratch-org",
+  "scripts": {
+    "develop": "./scripts/develop.sh",
+    "test": "yarn test:dev-ed && yarn test:scratch",
+    "test:dev-ed": "./test/dev-ed.sh",
+    "test:scratch-org": "./test/scratch-org.sh"
+  }
+}
