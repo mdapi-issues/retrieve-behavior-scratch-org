@@ -7,7 +7,7 @@
   "bugs": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org/issues",
   "dependencies": {},
   "devDependencies": {
-    "sfdx-cli": "7.127.0"
+    "sfdx-cli": "7.133.0"
   },
   "homepage": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org",
   "keywords": [
