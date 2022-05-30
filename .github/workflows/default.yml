@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  default:
+  developer-edition:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,22 +17,33 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - name: Install dependencies
-        run: yarn
+        run: yarn install
       - name: Authenticate Developer Edition and run test
         env:
           SFDX_AUTH_URL_DEVED: ${{ secrets.SFDX_AUTH_URL_DEVED }}
         run: |
-          npx sfdx-plugin-auth-url auth-url:import -a mdapi-issues-deved "${SFDX_AUTH_URL_DEVED}"
-          yarn test:dev-ed
+          npx sfdx-plugin-auth-url auth-url:import -s -a mdapi-issues-deved "${SFDX_AUTH_URL_DEVED}"
+          yarn test
+  scratch-org:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: yarn install
       - name: Authenticate DevHub, create scratch org and run test
         env:
           SFDX_AUTH_URL_DEVHUB: ${{ secrets.SFDX_AUTH_URL_DEVHUB }}
         run: |
           npx sfdx-plugin-auth-url auth-url:import -d -a devhub "${SFDX_AUTH_URL_DEVHUB}"
           yarn develop
-          yarn test:scratch-org
+          yarn test
       - name: Delete scratch org
         if: always()
         run: |
