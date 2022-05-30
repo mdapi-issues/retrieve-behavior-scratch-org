@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "## deploy to Developer Edition"
-sfdx force:source:deploy --sourcepath force-app
+sfdx force:source:deploy --sourcepath force-app -u mdapi-issues-deved
 
 echo "## retrieve CustomLabel:Greeting and Translations:en_US from Developer Edition"
 sfdx force:source:retrieve -m "CustomLabel:Greeting,Translations:en_US" -u mdapi-issues-deved
