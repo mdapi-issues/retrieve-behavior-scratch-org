@@ -12,7 +12,9 @@ const translationsPath = join(
 
 describe("Translations", function () {
   let isScratchOrg;
-  before(async () => {
+
+  before(async function () {
+    this.timeout(60 * 1000);
     isScratchOrg = await isScratchOrgFunc();
   });
 
@@ -24,10 +26,12 @@ describe("Translations", function () {
       join("sfdx-source", "translations"),
     ]);
   });
+
   it("should retrieve Translations without context of a CustomLabel", async function () {
     this.timeout(300 * 1000);
     await execa("sfdx", ["force:source:retrieve", "-m", "Translations:en_US"]);
   });
+
   it("should return custom label translations for a Scratch Org", async function () {
     if (!isScratchOrg) {
       this.skip();
@@ -36,6 +40,7 @@ describe("Translations", function () {
       await execa("grep", ["--quiet", "<customLabels>", translationsPath]);
     }).not.to.throw();
   });
+
   it("should not return custom label translations for a regular Org", async function () {
     if (isScratchOrg) {
       this.skip();
@@ -50,6 +55,7 @@ describe("Translations", function () {
     expect(err).to.not.equal(undefined);
     expect(err.exitCode).to.equal(1);
   });
+
   after("remove the CustomLabel", async function () {
     this.timeout(300 * 1000);
     await execa("sfdx", [

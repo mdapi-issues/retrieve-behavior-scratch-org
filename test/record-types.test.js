@@ -14,7 +14,9 @@ const recordTypesPath = join(
 
 describe("Record Types with Picklist Values", function () {
   let isScratchOrg;
-  before(async () => {
+
+  before(async function () {
+    this.timeout(60 * 1000);
     isScratchOrg = await isScratchOrgFunc();
   });
 
@@ -26,6 +28,7 @@ describe("Record Types with Picklist Values", function () {
       join("sfdx-source", "record-types"),
     ]);
   });
+
   it("should retrieve the RecordType without context", async function () {
     this.timeout(300 * 1000);
     await execa("sfdx", [
@@ -34,6 +37,7 @@ describe("Record Types with Picklist Values", function () {
       "RecordType:Dummy__c.DummyRecordType",
     ]);
   });
+
   it("should return picklistValues in the RecordType for a Scratch Org", async function () {
     if (!isScratchOrg) {
       this.skip();
@@ -42,6 +46,7 @@ describe("Record Types with Picklist Values", function () {
       await execa("grep", ["--quiet", "<picklistValues>", recordTypesPath]);
     }).not.to.throw();
   });
+
   it("should return picklistValues in the RecordType for a regular Org", async function () {
     if (isScratchOrg) {
       this.skip();
@@ -55,6 +60,7 @@ describe("Record Types with Picklist Values", function () {
     expect(err).to.not.equal(undefined);
     expect(err.exitCode).to.equal(1);
   });
+
   after("remove the CustomObject", async function () {
     this.timeout(300 * 1000);
     await execa("sfdx", [

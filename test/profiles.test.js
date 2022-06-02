@@ -12,7 +12,9 @@ const profilePath = join(
 
 describe("Profiles", function () {
   let isScratchOrg;
-  before(async () => {
+
+  before(async function () {
+    this.timeout(60 * 1000);
     isScratchOrg = await isScratchOrgFunc();
   });
 
@@ -24,10 +26,12 @@ describe("Profiles", function () {
       join("sfdx-source", "profiles"),
     ]);
   });
+
   it("should retrieve a Profile without context", async function () {
     this.timeout(300 * 1000);
     await execa("sfdx", ["force:source:retrieve", "-m", "Profile:Admin"]);
   });
+
   it("should return field permissions in the Profile for a Scratch Org", async function () {
     if (!isScratchOrg) {
       this.skip();
@@ -36,6 +40,7 @@ describe("Profiles", function () {
       await execa("grep", ["--quiet", "<fieldPermissions>", profilePath]);
     }).not.to.throw();
   });
+
   it("should not return field permissions in the Profile for a regular Org", async function () {
     if (isScratchOrg) {
       this.skip();
@@ -49,6 +54,7 @@ describe("Profiles", function () {
     expect(err).to.not.equal(undefined);
     expect(err.exitCode).to.equal(1);
   });
+
   after("remove the CustomField on Account", async function () {
     this.timeout(300 * 1000);
     await execa("sfdx", [
