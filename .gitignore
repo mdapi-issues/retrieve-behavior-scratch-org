@@ -1,9 +1,4 @@
-*-debug.log
-*-error.log
-/.nyc_output
-/dist
-/lib
-/package-lock.json
-/tmp
-node_modules
-/.sfdx/
+node_modules/
+.sfdx/
+.sf/
+/force-app/main/default/
