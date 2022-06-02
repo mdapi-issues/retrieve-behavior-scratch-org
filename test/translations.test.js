@@ -17,7 +17,7 @@ describe("Translations", function () {
   });
 
   it("should deploy Translations for a CustomLabel", async function () {
-    this.timeout(30 * 1000);
+    this.timeout(300 * 1000);
     await execa("sfdx", [
       "force:source:deploy",
       "--sourcepath",
@@ -25,7 +25,7 @@ describe("Translations", function () {
     ]);
   });
   it("should retrieve Translations without context of a CustomLabel", async function () {
-    this.timeout(30 * 1000);
+    this.timeout(300 * 1000);
     await execa("sfdx", ["force:source:retrieve", "-m", "Translations:en_US"]);
   });
   it("should return custom label translations for a Scratch Org", async function () {
@@ -51,7 +51,7 @@ describe("Translations", function () {
     expect(err.exitCode).to.equal(1);
   });
   after("remove the CustomLabel", async function () {
-    this.timeout(30 * 1000);
+    this.timeout(300 * 1000);
     await execa("sfdx", [
       "force:source:delete",
       "--noprompt",

@@ -17,7 +17,7 @@ describe("Profiles", function () {
   });
 
   it("should deploy a CustomField on Account", async function () {
-    this.timeout(30 * 1000);
+    this.timeout(300 * 1000);
     await execa("sfdx", [
       "force:source:deploy",
       "--sourcepath",
@@ -25,7 +25,7 @@ describe("Profiles", function () {
     ]);
   });
   it("should retrieve a Profile without context", async function () {
-    this.timeout(30 * 1000);
+    this.timeout(300 * 1000);
     await execa("sfdx", ["force:source:retrieve", "-m", "Profile:Admin"]);
   });
   it("should return field permissions in the Profile for a Scratch Org", async function () {
@@ -50,7 +50,7 @@ describe("Profiles", function () {
     expect(err.exitCode).to.equal(1);
   });
   after("remove the CustomField on Account", async function () {
-    this.timeout(30 * 1000);
+    this.timeout(300 * 1000);
     await execa("sfdx", [
       "force:source:delete",
       "--noprompt",

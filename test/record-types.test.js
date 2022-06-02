@@ -19,7 +19,7 @@ describe("Record Types with Picklist Values", function () {
   });
 
   it("should deploy a CustomObject with RecordTypes and CustomFields with Picklists", async function () {
-    this.timeout(30 * 1000);
+    this.timeout(300 * 1000);
     await execa("sfdx", [
       "force:source:deploy",
       "--sourcepath",
@@ -27,7 +27,7 @@ describe("Record Types with Picklist Values", function () {
     ]);
   });
   it("should retrieve the RecordType without context", async function () {
-    this.timeout(30 * 1000);
+    this.timeout(300 * 1000);
     await execa("sfdx", [
       "force:source:retrieve",
       "-m",
@@ -56,7 +56,7 @@ describe("Record Types with Picklist Values", function () {
     expect(err.exitCode).to.equal(1);
   });
   after("remove the CustomObject", async function () {
-    this.timeout(30 * 1000);
+    this.timeout(300 * 1000);
     await execa("sfdx", [
       "force:source:delete",
       "--noprompt",
