@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { execa } from "execa";
 import { join } from "path";
-import { isScratchOrg as isScratchOrgFunc } from "./helper.js";
+import { isSourceTrackingEnabled as isSourceTrackingEnabledFunc } from "./helper.js";
 
 const DEFAULT_PACKAGE_DIR = join("force-app", "main", "default");
 const profilePath = join(
@@ -11,11 +11,11 @@ const profilePath = join(
 );
 
 describe("Profiles", function () {
-  let isScratchOrg;
+  let isSourceTrackingEnabled;
 
   before(async function () {
     this.timeout(60 * 1000);
-    isScratchOrg = await isScratchOrgFunc();
+    isSourceTrackingEnabled = await isSourceTrackingEnabledFunc();
   });
 
   it("should deploy a CustomField on Account", async function () {
@@ -33,7 +33,7 @@ describe("Profiles", function () {
   });
 
   it("should return field permissions in the Profile for a Scratch Org", async function () {
-    if (!isScratchOrg) {
+    if (!isSourceTrackingEnabled) {
       this.skip();
     }
     expect(async () => {
@@ -42,7 +42,7 @@ describe("Profiles", function () {
   });
 
   it("should not return field permissions in the Profile for a regular Org", async function () {
-    if (isScratchOrg) {
+    if (isSourceTrackingEnabled) {
       this.skip();
     }
     let err;

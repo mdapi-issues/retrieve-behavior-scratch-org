@@ -1,10 +1,14 @@
 import { Org } from "@salesforce/core";
 
-export async function isScratchOrg() {
+export async function isSourceTrackingEnabled() {
   const conn = (await Org.create({})).getConnection();
-  const { records } = await conn.query(
-    "SELECT IsSandbox, TrialExpirationDate FROM Organization"
-  );
-  const organization = records[0];
-  return organization.IsSandbox && organization.TrialExpirationDate;
+  try {
+    await conn.tooling.query("SELECT Id FROM SourceMember LIMIT 1");
+  } catch (e) {
+    if (e.name === "INVALID_TYPE") {
+      return false;
+    }
+    throw e;
+  }
+  return true;
 }

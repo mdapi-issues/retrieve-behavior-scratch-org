@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { execa } from "execa";
 import { join } from "path";
-import { isScratchOrg as isScratchOrgFunc } from "./helper.js";
+import { isSourceTrackingEnabled as isSourceTrackingEnabledFunc } from "./helper.js";
 
 const DEFAULT_PACKAGE_DIR = join("force-app", "main", "default");
 const recordTypesPath = join(
@@ -13,11 +13,11 @@ const recordTypesPath = join(
 );
 
 describe("Record Types with Picklist Values", function () {
-  let isScratchOrg;
+  let isSourceTrackingEnabled;
 
   before(async function () {
     this.timeout(60 * 1000);
-    isScratchOrg = await isScratchOrgFunc();
+    isSourceTrackingEnabled = await isSourceTrackingEnabledFunc();
   });
 
   it("should deploy a CustomObject with RecordTypes and CustomFields with Picklists", async function () {
@@ -39,7 +39,7 @@ describe("Record Types with Picklist Values", function () {
   });
 
   it("should return picklistValues in the RecordType for a Scratch Org", async function () {
-    if (!isScratchOrg) {
+    if (!isSourceTrackingEnabled) {
       this.skip();
     }
     expect(async () => {
@@ -48,7 +48,7 @@ describe("Record Types with Picklist Values", function () {
   });
 
   it("should return picklistValues in the RecordType for a regular Org", async function () {
-    if (isScratchOrg) {
+    if (isSourceTrackingEnabled) {
       this.skip();
     }
     let err;

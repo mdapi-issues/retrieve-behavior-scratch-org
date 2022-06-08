@@ -6,7 +6,11 @@
 
 Typically, when retrieving `Profiles`, `RecordTypes` or `Translations` from an org, we only get the content for the other metadata types referenced in package.xml.
 
-What the docs don't mention, when we retrieve from a **Scratch Org** we are getting the full content.
+However if the org (Scratch Org or Sandbox) has Source Tracking enabled, we are getting the full content.
+
+> With source tracking, retrieving profiles returns profile information pertaining to anything else specified in the package.xml file plus any components getting tracked by source tracking. That includes any entity for which a change exists between your local project and the org.
+
+Source: Salesforce DX Developer Guide [Retrieve and Pull Changes to Profiles with Source Tracking](https://developer.salesforce.com/docs/atlas.en-us.238.0.sfdx_dev.meta/sfdx_dev/sfdx_dev_source_tracking_source_tracking_profiles.htm?q=behav)
 
 ### Profiles
 
@@ -28,5 +32,5 @@ see [docs for Translations](https://developer.salesforce.com/docs/atlas.en-us.ap
 
 This repo contains a test suite to reproduce
 
-- the documented behavior for a Developer Edition
-- the undocumented behavior for a Scratch Org
+- the default behavior for a Developer Edition
+- the different behavior for a Scratch Org

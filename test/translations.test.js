@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { execa } from "execa";
 import { join } from "path";
-import { isScratchOrg as isScratchOrgFunc } from "./helper.js";
+import { isSourceTrackingEnabled as isSourceTrackingEnabledFunc } from "./helper.js";
 
 const DEFAULT_PACKAGE_DIR = join("force-app", "main", "default");
 const translationsPath = join(
@@ -11,11 +11,11 @@ const translationsPath = join(
 );
 
 describe("Translations", function () {
-  let isScratchOrg;
+  let isSourceTrackingEnabled;
 
   before(async function () {
     this.timeout(60 * 1000);
-    isScratchOrg = await isScratchOrgFunc();
+    isSourceTrackingEnabled = await isSourceTrackingEnabledFunc();
   });
 
   it("should deploy Translations for a CustomLabel", async function () {
@@ -33,7 +33,7 @@ describe("Translations", function () {
   });
 
   it("should return custom label translations for a Scratch Org", async function () {
-    if (!isScratchOrg) {
+    if (!isSourceTrackingEnabled) {
       this.skip();
     }
     expect(async () => {
@@ -42,7 +42,7 @@ describe("Translations", function () {
   });
 
   it("should not return custom label translations for a regular Org", async function () {
-    if (isScratchOrg) {
+    if (isSourceTrackingEnabled) {
       this.skip();
     }
     let err;
@@ -50,7 +50,6 @@ describe("Translations", function () {
       await execa("grep", ["--quiet", "<customLabels>", translationsPath]);
     } catch (e) {
       err = e;
-      console.error(e);
     }
     expect(err).to.not.equal(undefined);
     expect(err.exitCode).to.equal(1);
