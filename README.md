@@ -10,7 +10,7 @@ However if the org (Scratch Org or Sandbox) has Source Tracking enabled, we are 
 
 > With source tracking, retrieving profiles returns profile information pertaining to anything else specified in the package.xml file plus any components getting tracked by source tracking. That includes any entity for which a change exists between your local project and the org.
 
-Source: Salesforce DX Developer Guide [Retrieve and Pull Changes to Profiles with Source Tracking](https://developer.salesforce.com/docs/atlas.en-us.238.0.sfdx_dev.meta/sfdx_dev/sfdx_dev_source_tracking_source_tracking_profiles.htm?q=behav)
+Source: Salesforce DX Developer Guide [Retrieve and Pull Changes to Profiles with Source Tracking](https://developer.salesforce.com/docs/atlas.en-us.238.0.sfdx_dev.meta/sfdx_dev/sfdx_dev_source_tracking_source_tracking_profiles.htm)
 
 ### Profiles
 
