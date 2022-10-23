@@ -24,7 +24,7 @@ jobs:
         env:
           SFDX_AUTH_URL_DEVED: ${{ secrets.SFDX_AUTH_URL_DEVED }}
         run: |
-          npx sfdx-plugin-auth-url auth-url:import -s -a mdapi-issues-deved "${SFDX_AUTH_URL_DEVED}"
+          npx sfdx auth:sfdxurl:store -s -a mdapi-issues-deved -f /dev/stdin <<< "${SFDX_AUTH_URL_DEVED}"
           yarn test
   scratch-org:
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
         env:
           SFDX_AUTH_URL_DEVHUB: ${{ secrets.SFDX_AUTH_URL_DEVHUB }}
         run: |
-          npx sfdx-plugin-auth-url auth-url:import -d -a devhub "${SFDX_AUTH_URL_DEVHUB}"
+          npx sfdx auth:sfdxurl:store -d -a devhub -f /dev/stdin <<< "${SFDX_AUTH_URL_DEVHUB}"
           yarn develop
           yarn test
       - name: Delete scratch org
