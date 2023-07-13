@@ -11,7 +11,7 @@
     "chai": "4.3.7",
     "execa": "7.1.1",
     "mocha": "10.2.0",
-    "sfdx-cli": "7.200.7"
+    "sfdx-cli": "7.209.6"
   },
   "homepage": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org",
   "keywords": [
