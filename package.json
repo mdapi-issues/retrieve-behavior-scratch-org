@@ -8,7 +8,7 @@
   "bugs": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org/issues",
   "dependencies": {},
   "devDependencies": {
-    "chai": "4.3.7",
+    "chai": "4.3.10",
     "execa": "8.0.1",
     "mocha": "10.2.0",
     "sfdx-cli": "7.200.7"
