@@ -11,7 +11,7 @@
     "@salesforce/core": "5.3.20",
     "chai": "4.3.10",
     "execa": "8.0.1",
-    "mocha": "10.2.0"
+    "mocha": "10.7.3"
   },
   "homepage": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org",
   "keywords": [
