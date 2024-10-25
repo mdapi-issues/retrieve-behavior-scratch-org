@@ -13,42 +13,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
       - name: Install dependencies
         run: |
-          yarn install
-          yarn global add @salesforce/cli
+          npm ci
+          npm install --global @salesforce/cli
       - name: Authenticate Developer Edition and run test
         env:
           SFDX_AUTH_URL_DEVED: ${{ secrets.SFDX_AUTH_URL_DEVED }}
         run: |
-          sfdx auth:sfdxurl:store -s -a mdapi-issues-deved -f <(echo "${SFDX_AUTH_URL_DEVED}")
-          yarn test
+          echo "${SFDX_AUTH_URL_DEVED}" | sf org login sfdx-url --set-default --alias mdapi-issues-deved --sfdx-url-stdin
+          npm run test
   scratch-org:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
       - name: Install dependencies
         run: |
-          yarn install
-          yarn global add @salesforce/cli
+          npm ci
+          npm install --global @salesforce/cli
       - name: Authenticate DevHub, create scratch org and run test
         env:
           SFDX_AUTH_URL_DEVHUB: ${{ secrets.SFDX_AUTH_URL_DEVHUB }}
         run: |
-          sfdx auth:sfdxurl:store -d -a devhub -f <(echo "${SFDX_AUTH_URL_DEVHUB}")
-          yarn develop
-          yarn test
+          echo "${SFDX_AUTH_URL_DEVHUB}" | sf org login sfdx-url --set-default-dev-hub --alias devhub --sfdx-url-stdin
+          npm run develop
+          npm run test
       - name: Delete scratch org
         if: always()
         run: |
-          sfdx force:org:delete -p
+          sf org delete scratch --no-prompt

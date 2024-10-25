@@ -20,16 +20,24 @@ describe("Profiles", function () {
 
   it("should deploy a CustomField on Account", async function () {
     this.timeout(300 * 1000);
-    await execa("sfdx", [
-      "force:source:deploy",
-      "--sourcepath",
+    await execa("sf", [
+      "project",
+      "deploy",
+      "start",
+      "--source-dir",
       join("sfdx-source", "profiles"),
     ]);
   });
 
   it("should retrieve a Profile without context", async function () {
     this.timeout(300 * 1000);
-    await execa("sfdx", ["force:source:retrieve", "-m", "Profile:Admin"]);
+    await execa("sf", [
+      "project",
+      "retrieve",
+      "start",
+      "--metadata",
+      "Profile:Admin",
+    ]);
   });
 
   it("should return field permissions in the Profile for a Scratch Org", async function () {
@@ -57,9 +65,11 @@ describe("Profiles", function () {
 
   after("remove the CustomField on Account", async function () {
     this.timeout(300 * 1000);
-    await execa("sfdx", [
-      "force:source:delete",
-      "--noprompt",
+    await execa("sf", [
+      "project",
+      "delete",
+      "source",
+      "--no-prompt",
       "--metadata",
       "CustomField:Account.Dummy01__c",
     ]);

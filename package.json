@@ -6,12 +6,11 @@
   "version": "0.0.0-development",
   "author": "Matthias Rolke @amtrack",
   "bugs": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org/issues",
-  "dependencies": {},
   "devDependencies": {
-    "@salesforce/core": "5.3.20",
-    "chai": "4.3.10",
-    "execa": "8.0.1",
-    "mocha": "10.2.0"
+    "@salesforce/core": "8.6.3",
+    "chai": "5.1.2",
+    "execa": "9.4.1",
+    "mocha": "10.7.3"
   },
   "homepage": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org",
   "keywords": [
@@ -23,7 +22,7 @@
   "license": "MIT",
   "repository": "mdapi-issues/retrieve-behavior-scratch-org",
   "scripts": {
-    "develop": "sfdx force:org:create -f config/project-scratch-def.json -a retrieve-behavior-scratch-org-dev -s",
+    "develop": "sf org create scratch -f config/project-scratch-def.json --alias retrieve-behavior-scratch-org-dev --set-default",
     "test": "mocha test/*.test.js"
   }
 }

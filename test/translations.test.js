@@ -20,16 +20,24 @@ describe("Translations", function () {
 
   it("should deploy Translations for a CustomLabel", async function () {
     this.timeout(300 * 1000);
-    await execa("sfdx", [
-      "force:source:deploy",
-      "--sourcepath",
+    await execa("sf", [
+      "project",
+      "deploy",
+      "start",
+      "--source-dir",
       join("sfdx-source", "translations"),
     ]);
   });
 
   it("should retrieve Translations without context of a CustomLabel", async function () {
     this.timeout(300 * 1000);
-    await execa("sfdx", ["force:source:retrieve", "-m", "Translations:en_US"]);
+    await execa("sf", [
+      "project",
+      "retrieve",
+      "start",
+      "--metadata",
+      "Translations:en_US",
+    ]);
   });
 
   it("should return custom label translations for a Scratch Org", async function () {
@@ -57,9 +65,11 @@ describe("Translations", function () {
 
   after("remove the CustomLabel", async function () {
     this.timeout(300 * 1000);
-    await execa("sfdx", [
-      "force:source:delete",
-      "--noprompt",
+    await execa("sf", [
+      "project",
+      "delete",
+      "source",
+      "--no-prompt",
       "--metadata",
       "CustomLabel:Greeting",
     ]);
