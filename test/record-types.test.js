@@ -22,18 +22,22 @@ describe("Record Types with Picklist Values", function () {
 
   it("should deploy a CustomObject with RecordTypes and CustomFields with Picklists", async function () {
     this.timeout(300 * 1000);
-    await execa("sfdx", [
-      "force:source:deploy",
-      "--sourcepath",
+    await execa("sf", [
+      "project",
+      "deploy",
+      "start",
+      "--source-dir",
       join("sfdx-source", "record-types"),
     ]);
   });
 
   it("should retrieve the RecordType without context", async function () {
     this.timeout(300 * 1000);
-    await execa("sfdx", [
-      "force:source:retrieve",
-      "-m",
+    await execa("sf", [
+      "project",
+      "retrieve",
+      "start",
+      "--metadata",
       "RecordType:Dummy__c.DummyRecordType",
     ]);
   });
@@ -62,13 +66,6 @@ describe("Record Types with Picklist Values", function () {
   });
 
   after("remove the CustomObject", async function () {
-    this.timeout(300 * 1000);
-    await execa("sfdx", [
-      "force:source:delete",
-      "--noprompt",
-      "--metadata",
-      "CustomObject:Dummy__c",
-    ]);
     await execa("rm", ["-rf", DEFAULT_PACKAGE_DIR]);
   });
 });
