@@ -9,7 +9,7 @@
   "devDependencies": {
     "@salesforce/core": "8.8.2",
     "chai": "5.2.0",
-    "execa": "9.5.2",
+    "execa": "9.6.0",
     "mocha": "11.5.0"
   },
   "homepage": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org",
