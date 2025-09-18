@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   developer-edition:
@@ -18,8 +19,8 @@ jobs:
           node-version-file: .node-version
       - name: Install dependencies
         run: |
-          npm ci
-          npm install --global @salesforce/cli
+          npm ci --ignore-scripts
+          npm install --ignore-scripts --global @salesforce/cli
       - name: Authenticate Developer Edition and run test
         env:
           SFDX_AUTH_URL_DEVED: ${{ secrets.SFDX_AUTH_URL_DEVED }}
@@ -35,8 +36,8 @@ jobs:
           node-version-file: .node-version
       - name: Install dependencies
         run: |
-          npm ci
-          npm install --global @salesforce/cli
+          npm ci --ignore-scripts
+          npm install --ignore-scripts --global @salesforce/cli
       - name: Authenticate DevHub, create scratch org and run test
         env:
           SFDX_AUTH_URL_DEVHUB: ${{ secrets.SFDX_AUTH_URL_DEVHUB }}
