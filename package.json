@@ -7,7 +7,7 @@
   "author": "Matthias Rolke @amtrack",
   "bugs": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org/issues",
   "devDependencies": {
-    "@salesforce/core": "8.23.1",
+    "@salesforce/core": "8.24.0",
     "chai": "6.2.0",
     "execa": "9.6.0",
     "mocha": "11.7.4"
