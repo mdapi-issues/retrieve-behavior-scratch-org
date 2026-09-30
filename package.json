@@ -8,7 +8,7 @@
   "bugs": "https://github.com/mdapi-issues/retrieve-behavior-scratch-org/issues",
   "devDependencies": {
     "@salesforce/core": "9.1.2",
-    "chai": "6.2.2",
+    "chai": "6.3.0",
     "execa": "10.0.0",
     "mocha": "11.8.0"
   },
